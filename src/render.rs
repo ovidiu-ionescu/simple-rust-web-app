@@ -15,17 +15,10 @@ pub fn render(data: &[Data]) -> Result<String, askama::Error> {
 
 #[test]
 fn test_render() {
-    let data = vec![
-        Data {
-            id: String::from("id 1"),
-            name: String::from("Name 1"),
-            error: String::new(),
-        },
-        Data {
-            id: String::from("id 2"),
-            name: String::new(),
-            error: String::from("An error"),
-        },
-    ];
+    let data = vec![Data { id: String::from("id 1"), name: String::from("Name 1"), error: String::new() }, Data {
+        id:    String::from("id 2"),
+        name:  String::new(),
+        error: String::from("An error"),
+    }];
     println!("{}", render(&data).unwrap());
 }

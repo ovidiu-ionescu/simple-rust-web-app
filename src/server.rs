@@ -1,17 +1,15 @@
 #![deny(warnings)]
 
-use std::convert::Infallible;
-
-use hyper::service::{make_service_fn, service_fn};
-use hyper::{Body, Method, Request, Response, Server, StatusCode};
+use std::{convert::Infallible, net::SocketAddr};
 
 use config::{Config, File, FileFormat};
-use std::net::SocketAddr;
-
+use hyper::{
+    service::{make_service_fn, service_fn},
+    Body, Method, Request, Response, Server, StatusCode,
+};
 use lazy_static::lazy_static;
 
 use super::render;
-
 use crate::data::Data;
 
 lazy_static! {
@@ -32,12 +30,10 @@ impl ApConfig {
     }
 }
 
-/*
-fn do_work() -> Result<String, Box<dyn std::error::Error + Send + Sync>> {
-    let domains = fetch_whois::DomainInfo::fetch_info();
-    render::render(&domains)
-}
-*/
+// fn do_work() -> Result<String, Box<dyn std::error::Error + Send + Sync>> {
+// let domains = fetch_whois::DomainInfo::fetch_info();
+// render::render(&domains)
+// }
 async fn do_work() -> String {
     let data = Data::fetch_data().await;
     render::render(&data).unwrap()
