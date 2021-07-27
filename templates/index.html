@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Web App</title>
+    <style type="text/css">
+      table, th, td {
+        border: 1px solid #467380;
+	border-collapse: collapse;
+      }
+      th, td {
+        padding: 3px 5px 3px 5px;
+      }
+      html {
+        background-color: black;
+        color: #8ce6ff;
+        font-family: Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Error</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.error }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
+
