@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  namespace: pantelimon
+spec:
+  type: NodePort
+  selector:
+    app: web-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30007
+
+
+

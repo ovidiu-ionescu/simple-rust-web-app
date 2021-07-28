@@ -23,7 +23,7 @@ struct ApConfig {
 impl ApConfig {
     fn read_config() -> ApConfig {
         let mut c = Config::new();
-        c.merge(File::new("settings", FileFormat::Toml).required(true)).unwrap();
+        c.merge(File::new("/config/settings", FileFormat::Toml).required(true)).unwrap();
         let address = c.get_str("address").unwrap();
 
         ApConfig { address }
