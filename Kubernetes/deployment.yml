@@ -16,7 +16,12 @@ spec:
         app: web-app
     spec:
       containers:
-        - image: web-app:2
+        - image: web-app:3
+          env:
+            - name: CONFIG_FILE
+              value: "/config/settings"
+            - name: CRAZY_NAME
+              value: "we don't care"
           name: web-app
           ports:
             - containerPort: 8080

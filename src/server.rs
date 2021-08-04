@@ -1,5 +1,6 @@
 #![deny(warnings)]
 
+use std::env;
 use std::{convert::Infallible, net::SocketAddr};
 
 use config::{Config, File, FileFormat};
@@ -23,7 +24,11 @@ struct ApConfig {
 impl ApConfig {
     fn read_config() -> ApConfig {
         let mut c = Config::new();
-        c.merge(File::new("/config/settings", FileFormat::Toml).required(true)).unwrap();
+        let config_file = match env::var("CONFIG_FILE") {
+            Ok(m) => m,
+            Err(_) => "settings".to_string(),
+        };
+        c.merge(File::new(&config_file, FileFormat::Toml).required(true)).unwrap();
         let address = c.get_str("address").unwrap();
 
         ApConfig { address }
@@ -36,6 +41,7 @@ impl ApConfig {
 // }
 async fn do_work() -> String {
     let data = Data::fetch_data().await;
+    println!("Doing work!");
     render::render(&data).unwrap()
 }
 

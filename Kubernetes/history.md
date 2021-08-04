@@ -60,3 +60,13 @@ k config view
 curl http://192.168.49.2:30007/index
 ```
 
+See the current default namespace:
+```bash
+k config view --minify | grep namespace:
+    namespace: default
+```
+
+Make a new default:
+```bash
+k config set-context --current --namespace=pantelimon
+```
