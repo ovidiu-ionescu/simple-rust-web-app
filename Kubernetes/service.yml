@@ -10,8 +10,11 @@ spec:
   ports:
     - name: http
       protocol: TCP
+      # probably not used here because of NodePort service type
       port: 8080
-      targetPort: 8080
+      # port of the pod
+      targetPort: 8081
+      # This is the one visible from outside, you use it in curl
       nodePort: 30007
 
 

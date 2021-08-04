@@ -24,7 +24,7 @@ spec:
               value: "we don't care"
           name: web-app
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
           volumeMounts:
             - name: config
               mountPath: /config
