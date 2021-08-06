@@ -45,6 +45,12 @@ async fn do_work() -> String {
     render::render(&data).unwrap()
 }
 
+async fn do_work_json() -> String {
+    let data = Data::fetch_data().await;
+    println!("Doing json work!");
+    serde_json::to_string(&data).unwrap()
+}
+
 async fn hello(req: Request<Body>) -> Result<Response<Body>, Infallible> {
     match (req.method(), req.uri().path()) {
         (&Method::GET, "/index") => {
@@ -53,6 +59,16 @@ async fn hello(req: Request<Body>) -> Result<Response<Body>, Infallible> {
             let response = Response::builder()
                 .status(StatusCode::OK)
                 .header("content-type", "text/html")
+                .header("server", "hyper")
+                .body(Body::from(content))
+                .unwrap();
+            Ok(response)
+        }
+        (&Method::GET, "/json") => {
+            let content = do_work_json().await;
+            let response = Response::builder()
+                .status(StatusCode::OK)
+                .header("content-type", "application/json")
                 .header("server", "hyper")
                 .body(Body::from(content))
                 .unwrap();
